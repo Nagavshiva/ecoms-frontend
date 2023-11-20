@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:8080";
+const url = "https://ecoms-backend.onrender.com";
 
 const userService = {
     loginUser: async(userData)=>{

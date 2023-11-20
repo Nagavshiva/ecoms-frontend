@@ -1,4 +1,4 @@
-import { Container, Navbar,Button,Nav } from "react-bootstrap";
+import { Container, Navbar, Button, Nav } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import LogoutButton from "./user/LogoutButton";
 import { NavLink } from "react-router-dom";
@@ -10,10 +10,9 @@ const Header = () => {
     <>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container fluid>
-          <Navbar.Brand href="/">Shopify</Navbar.Brand>
+          <Navbar.Brand href="/"style={{ color: "red", fontSize: "1.5rem", fontWeight: "bold" }}>Shopify</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-    
             <Nav
               className="mx-auto my-2 my-lg-0"
               style={{ maxHeight: "100px" }}
@@ -22,22 +21,25 @@ const Header = () => {
               <SearchBox />
             </Nav>
             {user ? (
+              <div className="d-flex align-items-center">
+                <span className="text-green me-2">Hello, {user.email.substring(0,5)}!</span>
                 <LogoutButton />
-              ) : (
-                <div>
-                  <NavLink to="/login">
-                    <Button
-                      variant="outline-success"
-                      style={{ marginRight: "8px" }}
-                    >
-                      Login
-                    </Button>
-                  </NavLink>
-                  <NavLink to="/reg">
-                    <Button variant="outline-success">Register</Button>
-                  </NavLink>
-                </div>
-              )}
+              </div>
+            ) : (
+              <div>
+                <NavLink to="/login">
+                  <Button
+                    variant="outline-success"
+                    style={{ marginRight: "8px" }}
+                  >
+                    Login
+                  </Button>
+                </NavLink>
+                <NavLink to="/reg">
+                  <Button variant="outline-success">Register</Button>
+                </NavLink>
+              </div>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>

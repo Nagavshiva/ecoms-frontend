@@ -17,12 +17,12 @@ const LoginForm = () => {
   console.log(error);
   console.log(user);
 
-  const redirect = "/";
+
   useEffect(() => {
     if (user) {
-      navigate(redirect);
+      navigate("/");
     }
-  }, [user, redirect, navigate]);
+  }, [user, navigate]);
 
   const handleChange = (e) => {
     // Clear the error related to the current input field when the user starts typing

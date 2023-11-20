@@ -5,7 +5,8 @@ import * as userActions from "../actions/userActions";
 const userSlice = createSlice({
     name: 'user',
     initialState: {
-        user:JSON.parse(localStorage.getItem("user")) ?? null,
+        user: JSON.parse(localStorage.getItem("user")) ?? null,
+        isLoggedIn: !!JSON.parse(localStorage.getItem("user")),
         loading: false,
         error: null,
     },
@@ -13,7 +14,11 @@ const userSlice = createSlice({
         logoutUser: (state) => {
             state.user = null;
             localStorage.removeItem("user"); // Remove user data from local storage
-          },
+            state.isLoggedIn = false; 
+        },
+        setLoggedIn: (state, action) => {
+            state.isLoggedIn = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -25,6 +30,8 @@ const userSlice = createSlice({
                 state.user = action.payload;
                 // Save user data to local storage
                 localStorage.setItem("user", JSON.stringify(action.payload));
+                state.isLoggedIn = true;
+                state.error = null;
             })
             .addCase(userActions.loginUser.rejected, (state, action) => {
                 state.loading = false;
@@ -40,6 +47,7 @@ const userSlice = createSlice({
                 state.user = action.payload;
                 // Save user data to local storage
                 localStorage.setItem("user", JSON.stringify(action.payload));
+                state.isLoggedIn = true;
             })
             .addCase(userActions.registerUser.rejected, (state, action) => {
                 state.loading = false;

@@ -10,7 +10,8 @@ const productSlice = createSlice({
         loading: false,
         error: null,
     },
-    reducers: {},
+    reducers: {
+    },
     extraReducers: (builder) => {
         builder
             .addCase(productActions.fetchProducts.pending, (state) => {
